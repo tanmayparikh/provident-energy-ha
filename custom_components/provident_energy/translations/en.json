@@ -1,0 +1,22 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to Provident Energy",
+        "description": "Set up Provident Energy integration to access your utility usage data.",
+        "data": {
+          "username": "Username",
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to Provident Energy API. Please check your internet connection and try again.",
+      "invalid_auth": "Invalid authentication credentials. Please check your username and password.",
+      "unknown": "An unexpected error occurred. Please check the logs for more information."
+    },
+    "abort": {
+      "already_configured": "This Provident Energy account is already configured."
+    }
+  }
+}

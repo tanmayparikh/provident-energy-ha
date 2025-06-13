@@ -1,0 +1,9 @@
+# Service definitions for Provident Energy integration
+
+refresh_data:
+  name: Refresh Data
+  description: Manually refresh data from Provident Energy API.
+  target:
+    entity:
+      integration: provident_energy
+      domain: sensor
