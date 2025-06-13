@@ -6,15 +6,22 @@ from typing import Any
 
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.data_entry_flow import ConfigFlowResult
 from homeassistant.exceptions import HomeAssistantError
 
-from api import ProvidentEnergyAPI
+from .api import ProvidentEnergyAPI
 from .const import (
     DOMAIN,
     CONF_USERNAME,
     CONF_PASSWORD,
 )
+
+
+class CannotConnect(HomeAssistantError):
+    """Error to indicate we cannot connect."""
+
+
+class InvalidAuth(HomeAssistantError):
+    """Error to indicate there is invalid auth."""
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -37,8 +44,9 @@ async def validate_input(data: dict[str, Any]) -> dict[str, Any]:
             raise InvalidAuth
 
         return {"title": f"Provident Energy ({data[CONF_USERNAME]})"}
-    finally:
-        pass
+    except Exception as ex:
+        _LOGGER.error(f"Error validating input: {ex}")
+        raise CannotConnect from ex
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -48,7 +56,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(
             self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
+    ):
         """Handle the initial step."""
         errors: dict[str, str] = {}
         if user_input is not None:
@@ -66,11 +74,3 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
         )
-
-
-class CannotConnect(HomeAssistantError):
-    """Error to indicate we cannot connect."""
-
-
-class InvalidAuth(HomeAssistantError):
-    """Error to indicate there is invalid auth."""

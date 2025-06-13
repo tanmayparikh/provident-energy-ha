@@ -1,0 +1,42 @@
+{
+    "name": "Provident Energy Home Assistant Integration",
+    "dockerFile": "Dockerfile",
+    "postCreateCommand": "pip install -e .",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "github.vscode-pull-request-github",
+                "ryanluker.vscode-coverage-gutters",
+                "matangover.mypy"
+            ],
+            "settings": {
+                "python.pythonPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "python.formatting.provider": "black",
+                "editor.formatOnPaste": false,
+                "editor.formatOnSave": true,
+                "editor.formatOnType": true,
+                "files.trimTrailingWhitespace": true
+            }
+        }
+    },
+    "forwardPorts": [8123],
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.11"
+        }
+    },
+    "runArgs": [
+        "--network=host"
+    ],
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspaces/provident-energy-ha,type=bind,consistency=cached"
+    ],
+    "containerEnv": {
+        "PYTHONPATH": "/workspaces/provident-energy-ha"
+    }
+}

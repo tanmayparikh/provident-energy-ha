@@ -1,0 +1,18 @@
+version: '3'
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/workspaces/provident-energy-ha
+    environment:
+      - PYTHONPATH=/workspaces/provident-energy-ha
+    ports:
+      - "5678:5678"  # For debugpy
+      - "8123:8123"  # For Home Assistant
+    network_mode: host
+    command: /bin/sh -c "chmod +x /usr/local/bin/entrypoint.sh && /usr/local/bin/entrypoint.sh sleep infinity"
+    # For Windows, you might need to use this instead of network_mode: host
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"

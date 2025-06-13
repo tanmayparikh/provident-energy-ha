@@ -62,13 +62,32 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project includes a devcontainer configuration for easy development and testing:
 
+### Using VS Code
+
 1. Install [VS Code](https://code.visualstudio.com/), [Docker](https://www.docker.com/products/docker-desktop), and the [Remote - Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 2. Clone this repository
 3. Open the repository in VS Code
 4. When prompted, click "Reopen in Container" or run the "Remote-Containers: Reopen in Container" command
 5. VS Code will build the container and open the project inside it
 
-The devcontainer includes all necessary dependencies and tools for development. See the `.devcontainer/README.md` file for more details.
+### Using PyCharm
+
+1. Install [PyCharm Professional](https://www.jetbrains.com/pycharm/) (required for remote debugging) and [Docker](https://www.docker.com/products/docker-desktop)
+2. Clone this repository
+3. Open the repository in PyCharm
+4. Set up the Docker-based remote interpreter:
+   - Go to File > Settings > Project > Python Interpreter
+   - Click the gear icon and select "Add..."
+   - Choose "Docker Compose" from the left menu
+   - Select the docker-compose.yml file (or create one based on the devcontainer configuration)
+   - Click "OK" to create the interpreter
+5. Configure remote debugging:
+   - Create a new Run/Debug Configuration (Run > Edit Configurations...)
+   - Add a new "Python Debug Server" configuration
+   - Set the host to localhost and port to 5678 (the default debugpy port)
+   - Apply the changes
+
+The devcontainer includes all necessary dependencies and tools for development, including debugpy for PyCharm remote debugging. See the `.devcontainer/README.md` file for more detailed instructions.
 
 ## License
 
