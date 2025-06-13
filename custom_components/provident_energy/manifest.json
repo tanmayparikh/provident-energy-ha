@@ -12,5 +12,6 @@
     "requests>=2.32.3"
   ],
   "integration_type": "entity",
-  "single_config_entry": true
+  "single_config_entry": true,
+  "version": "1.0.0"
 }
